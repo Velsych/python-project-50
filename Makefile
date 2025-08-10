@@ -23,4 +23,4 @@ coverage:
 	uv run pytest --cov
 
 test:
-	uv run pytest test
+	uv run pytest tests
