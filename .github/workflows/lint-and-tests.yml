@@ -14,7 +14,7 @@ jobs:
                 make install
             - name: run lint and tests
               run: |
-                make check
+                make lint
                 make test
                 make coverage
             - name: SonarQubeScan
