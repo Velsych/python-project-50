@@ -13,8 +13,14 @@ package-reinstall: build
 
 
 lint:
-	uv run ruff check brain_games
+	uv run ruff check difference_calculator
 
 
 fix:
-	uv run ruff check brain_games --fix
+	uv run ruff check difference_calculator --fix
+
+coverage:
+	uv run pytest --cov
+
+test:
+	uv run pytest test
