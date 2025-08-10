@@ -17,6 +17,10 @@ jobs:
                 make lint
                 make test
                 make coverage
+            - name: Install tox and any other packages
+              run: pip install tox
+            - name: Run tox
+              run: tox -e py
             - name: SonarQubeScan
               uses: SonarSource/sonarqube-scan-action@v5
               env:
