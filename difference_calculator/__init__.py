@@ -4,5 +4,4 @@ from difference_calculator.core.modules import parse_module
 __all__ = (
     "doc_gendiff",
     "parse_module",
-
 )

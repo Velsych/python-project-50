@@ -20,7 +20,7 @@ fix:
 	uv run ruff check difference_calculator --fix
 
 coverage:
-	uv run pytest --cov-report=xml
+	uv run pytest --cov
 
 test:
 	uv run pytest tests

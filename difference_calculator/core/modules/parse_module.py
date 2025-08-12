@@ -23,7 +23,9 @@ def diff_searcher(file1, file2):
     return same
 
 
-def generate_diff(parsed_file1, parsed_file2):
+def generate_diff(file1, file2):
+    parsed_file1 = file_parser(file1)
+    parsed_file2 = file_parser(file2)
     def sort_dict(json_dict):
         final_dict = {}
         half_sorted_dict = sorted(json_dict.items())
