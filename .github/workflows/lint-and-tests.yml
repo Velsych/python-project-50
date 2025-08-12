@@ -12,14 +12,11 @@ jobs:
               run: |
                 pip install uv
                 make install
-                pip install tox
             - name: run lint and tests
               run: |
                 make lint
                 make test
                 make coverage
-            - name: Run tox
-              run: tox -e py
             - name: SonarQubeScan
               uses: SonarSource/sonarqube-scan-action@v5
               env:
