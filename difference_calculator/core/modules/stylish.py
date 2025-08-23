@@ -1,7 +1,7 @@
 from difference_calculator.core.modules import parse_module
 
 
-def choose_styler(data,style):
+def choose_styler(data, style):
     match style:
         case "json":
             line = []
@@ -16,20 +16,23 @@ def choose_styler(data,style):
 def formatter_plain(data):
     pass
 
-def dictionary_formatter(dictionary_in,initial_depth):
+
+def dictionary_formatter(dictionary_in, initial_depth):
     line = ["{"]
-    for k,v in dictionary_in.items():
+    for k, v in dictionary_in.items():
         if isinstance(v, dict):
-            line.append(f"{get_intend(initial_depth)}{k}: "+ dictionary_formatter(v,initial_depth+1))
+            line.append(f"{get_intend(
+                initial_depth)}{k}: " +
+                         dictionary_formatter(v, initial_depth + 1))
         else:
             line.append(f"{get_intend(initial_depth)}{k}: {v}")
-    line.append(f'{get_intend(initial_depth-1)}'+"}")
+    line.append(f'{get_intend(initial_depth - 1)}' + "}")
     return "\n".join(line)
 
 
-def format_value(value, initial_depth=1 ):
+def format_value(value, initial_depth=1):
     if isinstance(value, dict):
-        return dictionary_formatter(value,initial_depth+1)
+        return dictionary_formatter(value, initial_depth + 1)
     elif isinstance(value, str):
         return value
     elif value is None:
@@ -40,29 +43,41 @@ def format_value(value, initial_depth=1 ):
         return str(value)
 
 
-def get_intend(depth, spaces= 4, symbol = None):
-    if not symbol is None:
-        ready_spaces = " " *  (depth * spaces - 2)
+def get_intend(depth, spaces=4, symbol=None):
+    if symbol is not None:
+        ready_spaces = " " * (depth * spaces - 2)
         return f'{ready_spaces}{symbol} '
     else:
         ready_spaces = " " * depth * spaces
         return f'{ready_spaces}'
-def formatter_json(diff = None,initial_depth = 1):
+
+
+def formatter_json(diff=None, initial_depth=1):
     line = []
     for object in diff:
         match type(object):
             case parse_module.AddChange:
-                line.append(f"{get_intend(initial_depth,symbol="+")}{object.key}: {format_value(object.value,initial_depth)}")
+                line.append(f"{get_intend(
+                    initial_depth, symbol="+")}{object.key}: {format_value(
+                    object.value, initial_depth)}")
             case parse_module.DeleteChange:
-                line.append(f"{get_intend(initial_depth,symbol="-")}{object.key}: {format_value(object.value,initial_depth)}")
+                line.append(f"{get_intend(
+                    initial_depth, symbol="-")}{object.key}: {format_value(
+                    object.value, initial_depth)}")
             case parse_module.Changed:
-                line.append(f"{get_intend(initial_depth,symbol="-")}{object.key}: {format_value(object.old_value,initial_depth)}")
-                line.append(f"{get_intend(initial_depth,symbol="+")}{object.key}: {format_value(object.value,initial_depth)}")
+                line.append(f"{get_intend(
+                    initial_depth, symbol="-")}{object.key}: {format_value(
+                    object.old_value, initial_depth)}")
+                line.append(f"{get_intend(
+                    initial_depth, symbol="+")}{object.key}: {format_value(
+                    object.value, initial_depth)}")
             case parse_module.Stayed:
-                line.append(f"{get_intend(initial_depth)}{object.key}: {format_value(object.value,initial_depth)}")
+                line.append(f"{get_intend(
+                    initial_depth)}{object.key}: {format_value(
+                    object.value, initial_depth)}")
             case parse_module.Nested:
-                line.append(f"{get_intend(initial_depth)}{object.key}: "+"{")
-                line.append(formatter_json(object.changes,initial_depth+1))
-                line.append(get_intend(initial_depth)+"}")
+                line.append(f"{get_intend(initial_depth)}{object.key}: " + "{")
+                line.append(formatter_json(object.changes, initial_depth + 1))
+                line.append(get_intend(initial_depth) + "}")
     return "\n".join(line)
 
