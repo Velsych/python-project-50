@@ -2,6 +2,9 @@ import json
 
 import yaml
 
+from collections import namedtuple
+
+from difference_calculator.core.modules import stylish
 
 def file_parser(file_path):
     if file_path.endswith(".json"):
@@ -10,47 +13,43 @@ def file_parser(file_path):
         return yaml.load(open(file_path), yaml.Loader)
 
 
-def sort_dict(json_dict):
-    final_dict = {}
-    half_sorted_dict = sorted(json_dict.items())
-    for k, v in half_sorted_dict:
-        if str(v) == "True" or str(v) == "False":
-            v = str(v).lower()
-        final_dict[k] = v
-    return final_dict
+AddChange = namedtuple("AddChange", ["key", "value" ])  # + timeout: 20
+Changed = namedtuple("Changed", ["key", "value", "old_value" ])
+DeleteChange = namedtuple("Deleted", ["key","value"])
+Nested = namedtuple("Nested", ["key", "changes"])
+Stayed = namedtuple("Stayed",["key","value"])
 
 
-def look_format(non_format_answer):
-    result = "{ \n"
-    for k, v in non_format_answer.items():
-        result += f"    {k}: {str(v)}\n"
-    result += "}"
-    return result
+    
+def good_diff_searcher(old_file, new_file):
+    keys = old_file.keys() | new_file.keys()  # (1,2,3)(2,3,4) = (1,2,3,4)
+    
+    diff_result = []
+    
+    for key in sorted(keys):
+        if key not in old_file.keys(): # added
+            added = AddChange(key, new_file[key])
+            diff_result.append(added)
+        elif key not in new_file.keys(): # deleted
+            deleted = DeleteChange(key, old_file[key])
+            diff_result.append(deleted)
+        elif isinstance(old_file[key], dict) and isinstance(new_file[key], dict):
+            nested_dicts = good_diff_searcher(old_file[key], new_file[key])
+            nested = Nested(key, nested_dicts)
+            diff_result.append(nested)
+        elif old_file[key] == new_file[key]: # stayed
+            stayed = Stayed(key, new_file[key])
+            diff_result.append(stayed)
+        else: # changed
+            changed = Changed(key, new_file[key], old_file[key])
+            diff_result.append(changed)
+    return diff_result
 
-
-def diff_searcher(file1, file2):
-    same = {}
-    sorted_dict1 = sort_dict(file1)
-    sorted_dict2 = sort_dict(file2)
-    for key, value in sorted_dict1.items():
-        if key in sorted_dict2:
-            if sorted_dict1[key] == sorted_dict2[key]:
-                same[f"  {key}"] = sorted_dict1[key]
-            else:
-                same[f'- {key}'] = sorted_dict1[key]
-                same[f"+ {key}"] = sorted_dict2[key]
-        else:
-            same[f"- {key}"] = sorted_dict1[key]
-    for key in sorted_dict2.keys():
-        if key not in same:
-            same[f"+ {key}"] = sorted_dict2[key]
-    return look_format(same)
-
-
-def generate_diff(file1, file2):
+def generate_diff(file1, file2,format = "plain"):
     parsed_file1 = file_parser(file1)
     parsed_file2 = file_parser(file2)
-    return diff_searcher(parsed_file1, parsed_file2)
+    diffs_list = good_diff_searcher(parsed_file1,parsed_file2)
+    return stylish.choose_styler(diffs_list,format)
     
 
 
