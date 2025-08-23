@@ -37,11 +37,11 @@ def file2_not_flat():
 
 
 def test_json_flat(file1_flat,file2_flat,json_correct_flat):
-    formatted = difference_calculator.parse_module.generate_diff(file1_flat,file2_flat)
+    formatted = difference_calculator.parse_module.generate_diff(file1_flat,file2_flat,"json")
     assert formatted == json_correct_flat
 
 
 
 def test_json_not_flat(file1_not_flat,file2_not_flat,json_correct_not_flat):
-    formatted = difference_calculator.parse_module.generate_diff(file1_not_flat,file2_not_flat)
+    formatted = difference_calculator.parse_module.generate_diff(file1_not_flat,file2_not_flat,"json")
     assert formatted == json_correct_not_flat
