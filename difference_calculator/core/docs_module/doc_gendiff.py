@@ -1,7 +1,7 @@
 import argparse
 
 
-def doc_start():  # pragma: no cover  #NOSONAR
+def doc_start():  # pragma: no cover  NOSONAR
     parser = argparse.ArgumentParser(
         prog="gendiff",
         description="Compares two configuration files and shows a difference."
