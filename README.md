@@ -6,7 +6,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Velsych_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Velsych_python-project-50)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Velsych_python-project-50&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Velsych_python-project-50)
 
-<div class="tenor-gif-embed" data-postid="17132887018908126710" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/cat-typing-on-keyboard---i%27m-cooking-gif-17132887018908126710">Cat Typing On Keyboard - I&#39;M Cooking GIF</a>from <a href="https://tenor.com/search/cat+typing+on+keyboard+-+i%27m+cooking-gifs">Cat Typing On Keyboard - I&#39;M Cooking GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+![hippo](https://tenor.com/ru/view/cat-typing-on-keyboard---i'm-cooking-gif-17132887018908126710)
 
 ### **Hello on my second project(im hardly can name it like that) on my own**
 
