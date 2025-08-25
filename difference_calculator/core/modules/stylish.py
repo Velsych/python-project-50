@@ -1,20 +1,19 @@
-from difference_calculator.core.modules import parse_module
+from difference_calculator.core.modules import parse_module,plain,json_formatter
 
 
-def choose_styler(data, style):
+def choose_styler(data, style):   # мне лениво переносить его в отдельный модуль пусть тут лежит :Р
     match style:
-        case "json":
+        case "stylish":
             line = []
             line.append("{")
-            line.append(formatter_json(data))
+            line.append(formatter_stylish(data))
             line.append("}")
             return "\n".join(line)
         case "plain":
-            return formatter_plain(data)
+            return plain.formatter_plain(data)
+        case "json":
+            return json_formatter.formatter_json(data)
         
-
-def formatter_plain(data):
-    pass
 
 
 def dictionary_formatter(dictionary_in, initial_depth):
@@ -52,7 +51,7 @@ def get_intend(depth, spaces=4, symbol=None):
         return f'{ready_spaces}'
 
 
-def formatter_json(diff=None, initial_depth=1):
+def formatter_stylish(diff, initial_depth=1):
     line = []
     for object in diff:
         match type(object):
@@ -77,7 +76,7 @@ def formatter_json(diff=None, initial_depth=1):
                     object.value, initial_depth)}")
             case parse_module.Nested:
                 line.append(f"{get_intend(initial_depth)}{object.key}: " + "{")
-                line.append(formatter_json(object.changes, initial_depth + 1))
+                line.append(formatter_stylish(object.changes, initial_depth + 1))
                 line.append(get_intend(initial_depth) + "}")
     return "\n".join(line)
 

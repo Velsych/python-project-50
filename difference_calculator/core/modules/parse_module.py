@@ -46,11 +46,8 @@ def good_diff_searcher(old_file, new_file):
     return diff_result
 
 
-def generate_diff(file1, file2, format="plain"):
+def generate_diff(file1, file2, format="stylish"):
     parsed_file1 = file_parser(file1)
     parsed_file2 = file_parser(file2)
     diffs_list = good_diff_searcher(parsed_file1, parsed_file2)
     return stylish.choose_styler(diffs_list, format)
-    
-
-

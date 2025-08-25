@@ -1,0 +1,100 @@
+[
+    {
+        "key": "common",
+        "status": "nested",
+        "child": [
+            {
+                "key": "follow",
+                "status": "added",
+                "value": false
+            },
+            {
+                "key": "setting1",
+                "status": "stayed",
+                "value": "Value 1"
+            },
+            {
+                "key": "setting2",
+                "status": "deleted",
+                "value": "200"
+            },
+            {
+                "key": "setting3",
+                "status": "changed",
+                "old_value": true,
+                "new_value": null
+            },
+            {
+                "key": "setting4",
+                "status": "added",
+                "value": "blah blah"
+            },
+            {
+                "key": "setting5",
+                "status": "added",
+                "value": null
+            },
+            {
+                "key": "setting6",
+                "status": "nested",
+                "child": [
+                    {
+                        "key": "doge",
+                        "status": "nested",
+                        "child": [
+                            {
+                                "key": "wow",
+                                "status": "changed",
+                                "old_value": "",
+                                "new_value": "so much"
+                            }
+                        ]
+                    },
+                    {
+                        "key": "key",
+                        "status": "stayed",
+                        "value": "value"
+                    },
+                    {
+                        "key": "ops",
+                        "status": "added",
+                        "value": "vops"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "key": "group1",
+        "status": "nested",
+        "child": [
+            {
+                "key": "baz",
+                "status": "changed",
+                "old_value": "bas",
+                "new_value": "bars"
+            },
+            {
+                "key": "foo",
+                "status": "stayed",
+                "value": "bar"
+            },
+            {
+                "key": "nest",
+                "status": "changed",
+                "old_value": null,
+                "new_value": "str"
+            }
+        ]
+    },
+    {
+        "key": "group2",
+        "status": "deleted",
+        "value": null
+    },
+    {
+        "key": "group3",
+        "status": "added",
+        "value": null
+    }
+]
