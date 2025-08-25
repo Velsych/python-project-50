@@ -1,7 +1,10 @@
 [project]
 name = "hexlet-code"
 version = "0.1.0"
-description = "Add your description here"
+description = "diff searcher and formatter of result"
+authors = [{name = "Alsy", email="velsych@mail.ru"}]
+classifiers = [
+    "Environment :: Console"]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [

@@ -5,7 +5,7 @@ from difference_calculator.core.modules import parse_module
 
 def format_value(value):  
     if isinstance(value, dict):
-        pass
+        return value
     elif isinstance(value, str):
         return value
     elif value is None:

@@ -54,32 +54,32 @@ def get_intend(depth, spaces=4, symbol=None):
         return f'{ready_spaces}'
 
 
-def formatter_stylish(diff, initial_depth=1):
+def formatter_stylish(diffs, initial_depth=1):
     line = []
-    for object in diff:
-        match type(object):
+    for diff in diffs:
+        match type(diff):
             case parse_module.AddChange:
                 line.append(f"{get_intend(
-                    initial_depth, symbol="+")}{object.key}: {format_value(
-                    object.value, initial_depth)}")
+                    initial_depth, symbol="+")}{diff.key}: {format_value(
+                    diff.value, initial_depth)}")
             case parse_module.DeleteChange:
                 line.append(f"{get_intend(
-                    initial_depth, symbol="-")}{object.key}: {format_value(
-                    object.value, initial_depth)}")
+                    initial_depth, symbol="-")}{diff.key}: {format_value(
+                    diff.value, initial_depth)}")
             case parse_module.Changed:
                 line.append(f"{get_intend(
-                    initial_depth, symbol="-")}{object.key}: {format_value(
-                    object.old_value, initial_depth)}")
+                    initial_depth, symbol="-")}{diff.key}: {format_value(
+                    diff.old_value, initial_depth)}")
                 line.append(f"{get_intend(
-                    initial_depth, symbol="+")}{object.key}: {format_value(
-                    object.value, initial_depth)}")
+                    initial_depth, symbol="+")}{diff.key}: {format_value(
+                    diff.value, initial_depth)}")
             case parse_module.Stayed:
                 line.append(f"{get_intend(
-                    initial_depth)}{object.key}: {format_value(
-                    object.value, initial_depth)}")
+                    initial_depth)}{diff.key}: {format_value(
+                    diff.value, initial_depth)}")
             case parse_module.Nested:
-                line.append(f"{get_intend(initial_depth)}{object.key}: " + "{")
-                line.append(formatter_stylish(object.changes,
+                line.append(f"{get_intend(initial_depth)}{diff.key}: " + "{")
+                line.append(formatter_stylish(diff.changes,
                                                initial_depth + 1))
                 line.append(get_intend(initial_depth) + "}")
     return "\n".join(line)

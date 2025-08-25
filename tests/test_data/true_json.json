@@ -32,7 +32,9 @@
             {
                 "key": "setting5",
                 "status": "added",
-                "value": null
+                "value": {
+                    "key5": "value5"
+                }
             },
             {
                 "key": "setting6",
@@ -82,7 +84,9 @@
             {
                 "key": "nest",
                 "status": "changed",
-                "old_value": null,
+                "old_value": {
+                    "key": "value"
+                },
                 "new_value": "str"
             }
         ]
@@ -90,11 +94,23 @@
     {
         "key": "group2",
         "status": "deleted",
-        "value": null
+        "value": {
+            "abc": 12345,
+            "deep": {
+                "id": 45
+            }
+        }
     },
     {
         "key": "group3",
         "status": "added",
-        "value": null
+        "value": {
+            "deep": {
+                "id": {
+                    "number": 45
+                }
+            },
+            "fee": 100500
+        }
     }
 ]

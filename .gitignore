@@ -6,3 +6,7 @@ main.py
 /file1.yml
 /file2.yaml
 /tests/what_was.json
+help.cast
+plain.cast
+json.cast
+stylish.cast

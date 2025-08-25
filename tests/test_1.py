@@ -1,6 +1,6 @@
 import difference_calculator
 import pytest
-import json
+
 
 @pytest.fixture
 def stylish_correct_flat():

@@ -3,7 +3,7 @@ from difference_calculator import doc_gendiff
 from difference_calculator.core.modules import parse_module
 
 
-def main():  # pragma: no cover
+def main():  #NOSONAR
     parser = doc_gendiff.doc_start()
     args = parser.parse_args()
     diff = parse_module.generate_diff(args.first_file,
@@ -11,5 +11,5 @@ def main():  # pragma: no cover
     print(diff)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": #NOSONAR
     main()
