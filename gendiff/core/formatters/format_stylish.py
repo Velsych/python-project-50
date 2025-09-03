@@ -1,23 +1,5 @@
-from difference_calculator.core.modules import (
-    json_formatter,
-    parse_module,
-    plain,
-)
+from gendiff.core import diff_generator
 
-
-def choose_styler(data, style):   # мне лениво переносить его 
-    match style:                  # в отдельный модуль пусть тут лежит :Р
-        case "stylish":
-            line = []
-            line.append("{")
-            line.append(formatter_stylish(data))
-            line.append("}")
-            return "\n".join(line)
-        case "plain":
-            return plain.formatter_plain(data)
-        case "json":
-            return json_formatter.formatter_json(data)
-        
 
 def dictionary_formatter(dictionary_in, initial_depth):
     line = ["{"]
@@ -58,26 +40,26 @@ def formatter_stylish(diffs, initial_depth=1):
     line = []
     for diff in diffs:
         match type(diff):
-            case parse_module.AddChange:
+            case diff_generator.AddChange:
                 line.append(f"{get_intend(
                     initial_depth, symbol="+")}{diff.key}: {format_value(
                     diff.value, initial_depth)}")
-            case parse_module.DeleteChange:
+            case diff_generator.DeleteChange:
                 line.append(f"{get_intend(
                     initial_depth, symbol="-")}{diff.key}: {format_value(
                     diff.value, initial_depth)}")
-            case parse_module.Changed:
+            case diff_generator.Changed:
                 line.append(f"{get_intend(
                     initial_depth, symbol="-")}{diff.key}: {format_value(
                     diff.old_value, initial_depth)}")
                 line.append(f"{get_intend(
                     initial_depth, symbol="+")}{diff.key}: {format_value(
                     diff.value, initial_depth)}")
-            case parse_module.Stayed:
+            case diff_generator.Stayed:
                 line.append(f"{get_intend(
                     initial_depth)}{diff.key}: {format_value(
                     diff.value, initial_depth)}")
-            case parse_module.Nested:
+            case diff_generator.Nested:
                 line.append(f"{get_intend(initial_depth)}{diff.key}: " + "{")
                 line.append(formatter_stylish(diff.changes,
                                                initial_depth + 1))

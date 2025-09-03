@@ -1,4 +1,4 @@
-from difference_calculator.core.modules import parse_module
+from gendiff.core import diff_generator
 
 
 def format_value(value):
@@ -18,18 +18,18 @@ def formatter_plain(diffs, diff_path=""):
     line = []
     for diff in diffs:
         match type(diff):
-            case parse_module.AddChange: 
+            case diff_generator.AddChange: 
                 line.append(f"Property '{diff_path + diff.key}' " +
                     f"was added with value: {format_value(diff.value)}")  
-            case parse_module.DeleteChange:
+            case diff_generator.DeleteChange:
                 line.append(f"Property '{diff_path + diff.key}' was removed")
-            case parse_module.Changed:
+            case diff_generator.Changed:
                 line.append(f"Property '{diff_path + diff.key}' " +
                     f"was updated. From {format_value(diff.old_value)} to " +
                     f"{format_value(diff.value)}")
-            case parse_module.Stayed:
+            case diff_generator.Stayed:
                 pass
-            case parse_module.Nested:
+            case diff_generator.Nested:
                 line.append(
                     formatter_plain(diff.changes, diff_path + diff.key + "."))
     return "\n".join(line)

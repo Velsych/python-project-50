@@ -1,12 +1,12 @@
 #!  /.venv/bin/python
-from difference_calculator import doc_gendiff
-from difference_calculator.core.modules import parse_module
+from gendiff import doc_gendiff
+from gendiff.core import diff_generator
 
 
 def main():  # NOSONAR
-    parser = doc_gendiff.doc_start()
+    parser = doc_gendiff.create_parser()
     args = parser.parse_args()
-    diff = parse_module.generate_diff(args.first_file,
+    diff = diff_generator.generate_diff(args.first_file,
                                        args.second_file, args.format)
     print(diff)
 

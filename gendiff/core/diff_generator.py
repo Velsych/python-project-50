@@ -1,17 +1,8 @@
-import json
+
 from collections import namedtuple
 
-import yaml
-
-from difference_calculator.core.modules import stylish
-
-
-def file_parser(file_path):
-    if file_path.endswith(".json"):
-        return json.load(open(file_path))
-    if file_path.endswith(".yml") or file_path.endswith(".yaml"):
-        return yaml.load(open(file_path), yaml.Loader)
-
+from gendiff.core.file_parser import file_parser
+from gendiff.core.formatters import choose_styler
 
 AddChange = namedtuple("AddChange", ["key", "value"])  # + timeout: 20
 Changed = namedtuple("Changed", ["key", "value", "old_value"])
@@ -50,4 +41,4 @@ def generate_diff(file1, file2, format="stylish"):
     parsed_file1 = file_parser(file1)
     parsed_file2 = file_parser(file2)
     diffs_list = good_diff_searcher(parsed_file1, parsed_file2)
-    return stylish.choose_styler(diffs_list, format)
+    return choose_styler.choose(diffs_list, format)

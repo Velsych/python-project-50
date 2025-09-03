@@ -1,4 +1,4 @@
-import difference_calculator
+import gendiff
 import pytest
 
 
@@ -63,30 +63,30 @@ def file2_not_flat():
 
 
 def test_stylish_flat(file1_flat,file2_flat,stylish_correct_flat):
-    formatted = difference_calculator.parse_module.generate_diff(file1_flat,file2_flat,"stylish")
+    formatted = gendiff.diff_generator.generate_diff(file1_flat,file2_flat,"stylish")
     assert formatted == stylish_correct_flat
 
 
 
 def test_stylish_not_flat(file1_not_flat,file2_not_flat,stylish_correct_not_flat):
-    formatted = difference_calculator.parse_module.generate_diff(file1_not_flat,file2_not_flat,"stylish")
+    formatted = gendiff.diff_generator.generate_diff(file1_not_flat,file2_not_flat,"stylish")
     assert formatted == stylish_correct_not_flat
 
 
 def test_plain_not_flat(file1_not_flat,file2_not_flat,plain_correct):
-    formatted = difference_calculator.parse_module.generate_diff(file1_not_flat,file2_not_flat,"plain")
+    formatted = gendiff.diff_generator.generate_diff(file1_not_flat,file2_not_flat,"plain")
     assert formatted == plain_correct
 
 
 def test_plain_flat(file1_flat,file2_flat,plain_correct_flat):
-    formatted = difference_calculator.parse_module.generate_diff(file1_flat,file2_flat,"plain")
+    formatted = gendiff.diff_generator.generate_diff(file1_flat,file2_flat,"plain")
     assert formatted == plain_correct_flat
 
 
 def test_json_flat(file1_flat,file2_flat,json_flat_correct):
-    formatted = difference_calculator.parse_module.generate_diff(file1_flat,file2_flat,"json")
+    formatted = gendiff.diff_generator.generate_diff(file1_flat,file2_flat,"json")
     assert formatted == json_flat_correct
 
 def test_json_not_flat(file1_not_flat,file2_not_flat,json_not_flat_correct):
-    formatted = difference_calculator.parse_module.generate_diff(file1_not_flat,file2_not_flat,"json")
+    formatted = gendiff.diff_generator.generate_diff(file1_not_flat,file2_not_flat,"json")
     assert formatted == json_not_flat_correct

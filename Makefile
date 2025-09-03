@@ -13,11 +13,11 @@ package-reinstall: build
 
 
 lint:
-	uv run ruff check difference_calculator
+	uv run ruff check gendiff
 
 
 fix:
-	uv run ruff check difference_calculator --fix
+	uv run ruff check gendiff --fix
 
 coverage:
 	uv run pytest --cov --cov-report xml

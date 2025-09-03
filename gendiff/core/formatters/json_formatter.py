@@ -1,6 +1,6 @@
 import json
 
-from difference_calculator.core.modules import parse_module
+from gendiff.core import diff_generator
 
 
 def format_value(value):  
@@ -22,28 +22,28 @@ def formatter_json(actual_diffs):
         line = []
         for diff in diffs:
             match type(diff):
-                case parse_module.AddChange: 
+                case diff_generator.AddChange: 
                     line.append({"key": diff.key,
                                 "status": "added",
                                 "value": format_value(diff.value)
                                 })
-                case parse_module.DeleteChange:
+                case diff_generator.DeleteChange:
                     line.append({"key": diff.key,
                                 "status": "deleted",
                                 "value": format_value(diff.value)
                                 })
-                case parse_module.Changed:
+                case diff_generator.Changed:
                     line.append({"key": diff.key,
                                 "status": "changed",
                                 "old_value": format_value(diff.old_value),
                                 "new_value": format_value(diff.value)
                                 })
-                case parse_module.Stayed:
+                case diff_generator.Stayed:
                     line.append({"key": diff.key,
                                 "status": "stayed",
                                 "value": format_value(diff.value)
                                 })
-                case parse_module.Nested:
+                case diff_generator.Nested:
                     line.append({"key": diff.key,
                                 "status": "nested",
                                 "child":  actual_formatter_json(diff.changes)
