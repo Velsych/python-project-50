@@ -1,5 +1,5 @@
 
-from gendiff.core.formatters import format_stylish, json_formatter, plain
+from gendiff.core.formatters import format_json, format_plain, format_stylish
 
 
 def choose(data, style):   
@@ -11,6 +11,6 @@ def choose(data, style):
             line.append("}")
             return "\n".join(line)
         case "plain":
-            return plain.formatter_plain(data)
+            return format_plain.formatter_plain(data)
         case "json":
-            return json_formatter.formatter_json(data)
+            return format_json.formatter_json(data)

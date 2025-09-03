@@ -31,9 +31,8 @@ def get_intend(depth, spaces=4, symbol=None):
     if symbol is not None:
         ready_spaces = " " * (depth * spaces - 2)
         return f'{ready_spaces}{symbol} '
-    else:
-        ready_spaces = " " * depth * spaces
-        return f'{ready_spaces}'
+    ready_spaces = " " * depth * spaces
+    return f'{ready_spaces}'
 
 
 def formatter_stylish(diffs, initial_depth=1):
