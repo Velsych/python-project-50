@@ -90,3 +90,5 @@ def test_json_flat(file1_flat,file2_flat,json_flat_correct):
 def test_json_not_flat(file1_not_flat,file2_not_flat,json_not_flat_correct):
     formatted = gendiff.diff_generator.generate_diff(file1_not_flat,file2_not_flat,"json")
     assert formatted == json_not_flat_correct
+
+

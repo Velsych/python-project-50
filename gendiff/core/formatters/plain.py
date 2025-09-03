@@ -10,6 +10,8 @@ def format_value(value):
         return 'null'
     elif isinstance(value, bool):
         return str(value).lower()
+    elif isinstance(value,int):
+        return str(value)
     else:
         return f"'{str(value)}'"
 
